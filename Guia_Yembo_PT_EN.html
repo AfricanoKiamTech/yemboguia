@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia Yembo / Yembo Quick Guide</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:      #0d1f3c;
+      --blue:      #1a3a6b;
+      --blue-mid:  #1e5fa0;
+      --teal:      #00b4cc;
+      --teal-lt:   #e0f7fa;
+      --accent:    #ff6b35;
+      --green:     #2ecc71;
+      --red:       #e74c3c;
+      --white:     #ffffff;
+      --gray-100:  #f1f5f9;
+      --gray-200:  #e2e8f0;
+      --gray-400:  #94a3b8;
+      --gray-700:  #334155;
+      --gray-900:  #0f172a;
+      --radius:    12px;
+      --shadow:    0 4px 24px rgba(10,22,40,.12);
+    }
+    body { font-family: 'Inter', sans-serif; background: #f0f4f8; color: var(--gray-900); font-size: 14px; line-height: 1.65; }
+    @page { size: A4; margin: 0; }
+    @media print {
+      body { background: white; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; page-break-after: always; }
+      .page:last-child { page-break-after: avoid; }
+      .no-print { display: none; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+    .toolbar { position: fixed; top: 20px; right: 24px; z-index: 100; display: flex; gap: 10px; }
+    .btn-print {
+      display: flex; align-items: center; gap: 8px;
+      background: var(--blue); color: white; border: none;
+      padding: 10px 20px; border-radius: 50px;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(22,85,162,.35); transition: all .2s;
+    }
+    .btn-print:hover { background: var(--navy); transform: translateY(-1px); }
+    .btn-print svg { width: 16px; height: 16px; }
+    .pages { display: flex; flex-direction: column; align-items: center; padding: 40px 20px 60px; gap: 32px; }
+    .page { width: 210mm; min-height: 297mm; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; position: relative; }
+
+    /* COVER */
+    .cover { display: flex; flex-direction: column; height: 297mm; }
+    .cover-hero {
+      background: linear-gradient(145deg, var(--navy) 0%, var(--blue) 55%, var(--teal) 100%);
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 60px 40px 40px; position: relative; overflow: hidden;
+    }
+    .cover-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .cover-badge { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.3); color: white; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 6px 18px; border-radius: 50px; margin-bottom: 32px; backdrop-filter: blur(10px); }
+    .cover-icon { width: 120px; height: 120px; background: rgba(255,255,255,.12); border: 2px solid rgba(255,255,255,.25); border-radius: 28px; display: flex; align-items: center; justify-content: center; margin-bottom: 36px; backdrop-filter: blur(10px); }
+    .cover-icon svg { width: 60px; height: 60px; }
+    .cover-title { color: white; font-size: 36px; font-weight: 800; text-align: center; line-height: 1.2; margin-bottom: 8px; text-shadow: 0 2px 20px rgba(0,0,0,.2); }
+    .cover-subtitle { color: rgba(255,255,255,.75); font-size: 15px; text-align: center; margin-bottom: 48px; }
+    .cover-divider { width: 60px; height: 3px; background: var(--teal); border-radius: 2px; margin: 0 auto 36px; }
+    .cover-pills { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .cover-pill { background: rgba(255,255,255,.13); border: 1px solid rgba(255,255,255,.22); color: white; font-size: 12px; font-weight: 500; padding: 8px 16px; border-radius: 50px; display: flex; align-items: center; gap: 6px; backdrop-filter: blur(6px); }
+    .cover-footer { padding: 28px 40px; display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--gray-200); }
+    .company-logo-area { display: flex; align-items: center; gap: 12px; }
+    .logo-placeholder { width: 48px; height: 48px; background: linear-gradient(135deg, var(--blue), var(--teal)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 16px; }
+    .company-name { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .company-tagline { font-size: 11px; color: var(--gray-400); margin-top: 2px; }
+    .cover-meta { text-align: right; font-size: 11px; color: var(--gray-400); line-height: 1.8; }
+
+    /* CONTENT PAGES */
+    .content-page { display: flex; flex-direction: column; min-height: 297mm; }
+    .lang-stripe { display: flex; height: 6px; }
+    .lang-stripe .pt { background: linear-gradient(90deg, var(--blue), var(--blue-mid)); flex: 1; }
+    .lang-stripe .en { background: linear-gradient(90deg, var(--teal), #00d4b4); flex: 1; }
+    .page-header { background: var(--navy); padding: 18px 36px; display: flex; align-items: center; justify-content: space-between; }
+    .page-header-title { color: white; font-size: 13px; font-weight: 600; letter-spacing: .5px; }
+    .page-header-num { color: var(--teal); font-size: 12px; font-weight: 700; }
+    .section-label { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 10px; }
+    .section-label.pt { background: #dbeafe; color: var(--blue); }
+    .section-label.en { background: var(--teal-lt); color: #006080; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0; flex: 1; }
+    .col-pt { padding: 32px 28px; border-right: 1px solid var(--gray-200); }
+    .col-en { padding: 32px 28px; }
+    h2.section-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--gray-200); }
+    h3.sub-title { font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
+    p, li { font-size: 12.5px; color: var(--gray-700); }
+    p { margin-bottom: 10px; }
+    .steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+    .step { display: flex; gap: 12px; align-items: flex-start; background: var(--gray-100); border-radius: 10px; padding: 12px 14px; }
+    .step-num { min-width: 28px; height: 28px; background: linear-gradient(135deg, var(--blue), var(--teal)); color: white; font-size: 13px; font-weight: 700; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .step-content { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
+    .step-content strong { color: var(--navy); }
+    .tip-cards { display: flex; flex-direction: column; gap: 8px; }
+    .tip-card { display: flex; gap: 12px; align-items: flex-start; border: 1px solid var(--gray-200); border-radius: 10px; padding: 11px 14px; }
+    .tip-icon { font-size: 20px; min-width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; background: var(--teal-lt); border-radius: 8px; flex-shrink: 0; }
+    .tip-text { font-size: 12px; color: var(--gray-700); line-height: 1.5; }
+    .tip-text strong { color: var(--navy); display: block; margin-bottom: 2px; }
+    .info-banner { background: linear-gradient(135deg, #eff6ff, #dbeafe); border: 1px solid #bfdbfe; border-radius: 10px; padding: 12px 16px; font-size: 12px; color: #1e40af; margin-top: 12px; display: flex; gap: 10px; align-items: flex-start; }
+    .info-banner .ib-icon { font-size: 20px; flex-shrink: 0; }
+    .info-banner strong { display: block; margin-bottom: 3px; }
+    .img-block { border-radius: 10px; overflow: hidden; margin: 14px 0; border: 1px solid var(--gray-200); }
+    .img-block img { width: 100%; display: block; object-fit: cover; height: 120px; }
+    .img-caption { background: var(--gray-100); padding: 7px 12px; font-size: 10px; color: var(--gray-400); font-style: italic; text-align: center; }
+    .col-divider { border: none; border-top: 2px dashed var(--gray-200); margin: 16px 0; }
+    .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+    .do-card { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 10px; }
+    .dont-card { background: #fef2f2; border: 1px solid #fecaca; border-radius: 8px; padding: 10px; }
+    .do-card .label { color: var(--green); font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+    .dont-card .label { color: var(--red); font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+    .do-card ul, .dont-card ul { padding-left: 14px; }
+    .do-card li, .dont-card li { font-size: 11px; color: var(--gray-700); margin-bottom: 3px; }
+    .problem-cards { display: flex; flex-direction: column; gap: 10px; }
+    .problem-card { border: 1px solid var(--gray-200); border-radius: 10px; overflow: hidden; }
+    .problem-header { background: #fee2e2; padding: 8px 14px; font-size: 12px; font-weight: 600; color: #991b1b; display: flex; align-items: center; gap: 6px; }
+    .problem-body { background: var(--white); padding: 10px 14px; font-size: 12px; color: var(--gray-700); line-height: 1.55; }
+    .problem-body ul { padding-left: 16px; }
+    .problem-body li { margin-bottom: 4px; }
+    .security-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+    .security-card { background: linear-gradient(135deg, #f8fafc, #f1f5f9); border: 1px solid var(--gray-200); border-radius: 10px; padding: 14px; text-align: center; }
+    .security-card .icon { font-size: 28px; margin-bottom: 6px; display: block; }
+    .security-card .label { font-size: 11px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 4px; }
+    .security-card .desc { font-size: 11px; color: var(--gray-400); line-height: 1.4; }
+    .contact-box { background: linear-gradient(135deg, var(--navy), var(--blue)); border-radius: 12px; padding: 20px; color: white; margin-bottom: 12px; }
+    .contact-box h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: white; }
+    .contact-item { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+    .contact-item:last-child { margin-bottom: 0; }
+    .contact-item .ci-icon { font-size: 18px; flex-shrink: 0; }
+    .contact-item .ci-text { font-size: 12px; line-height: 1.4; }
+    .contact-item .ci-label { font-weight: 600; color: var(--teal); font-size: 10px; letter-spacing: .5px; display: block; }
+    .contact-item .ci-value { color: rgba(255,255,255,.85); }
+    .note-box { background: linear-gradient(135deg, var(--teal-lt), #e8f5e9); border: 1px solid var(--teal); border-radius: 10px; padding: 14px 16px; font-size: 12px; color: #004d40; margin-top: 12px; }
+    .note-box strong { display: block; margin-bottom: 4px; }
+    .phone-mockup { display: flex; gap: 16px; margin: 14px 0; }
+    .phone-frame { background: var(--navy); border-radius: 16px; padding: 10px; width: 110px; flex-shrink: 0; }
+    .phone-screen { background: var(--white); border-radius: 10px; padding: 8px; }
+    .ps-header { background: var(--blue); color: white; border-radius: 6px; padding: 4px 6px; font-weight: 600; margin-bottom: 5px; font-size: 8px; }
+    .ps-item { display: flex; align-items: center; gap: 4px; padding: 3px 4px; border: 1px solid var(--gray-200); border-radius: 4px; margin-bottom: 3px; font-size: 7.5px; color: var(--gray-700); }
+    .ps-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .dot-green { background: var(--green); }
+    .dot-blue  { background: var(--blue); }
+    .dot-gray  { background: var(--gray-400); }
+    .phone-desc { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .phone-desc h4 { font-size: 12px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .phone-desc ul { padding-left: 14px; }
+    .phone-desc li { font-size: 11px; color: var(--gray-700); margin-bottom: 4px; }
+    .page-footer { background: var(--gray-100); border-top: 1px solid var(--gray-200); padding: 10px 36px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-company { font-size: 10px; font-weight: 600; color: var(--blue); }
+    .footer-yembo { font-size: 10px; color: var(--gray-400); }
+    .footer-page { font-size: 10px; color: var(--gray-400); }
+  </style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <button class="btn-print" onclick="window.print()">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6v-8z"/>
+    </svg>
+    Imprimir / Print PDF
+  </button>
+</div>
+
+<div class="pages">
+
+<!-- ========== PAGE 1 — COVER ========== -->
+<div class="page">
+  <div class="cover" style="height:297mm; display:flex; flex-direction:column; position:relative;">
+
+    <!-- TOP HEADER BANNER: Cabeçalho GIR -->
+    <div style="position:relative; width:100%; height:160px; overflow:hidden; flex-shrink:0;">
+      <img src="Cabe%C3%A7alho%20GIR.jpg" alt="Global International Relocation" style="width:100%; height:100%; object-fit:cover; object-position:center;" />
+      <!-- dark overlay for readability -->
+      <div style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(10,20,50,0.45) 0%, rgba(10,20,50,0.2) 100%);"></div>
+      <!-- badge top-left only -->
+      <div style="position:absolute; top:14px; left:18px; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.4); color:white; font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; padding:5px 14px; border-radius:50px; backdrop-filter:blur(8px);">
+        🌍 Guia do Cliente · Customer Guide
+      </div>
+    </div>
+
+    <!-- HERO BODY -->
+    <div style="background:linear-gradient(160deg, #0d1f3c 0%, #1a3a6b 50%, #00b4cc 100%); flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:28px 40px; position:relative; overflow:hidden;">
+      <!-- subtle pattern -->
+      <div style="position:absolute; inset:0; background:url('data:image/svg+xml,%3Csvg width=60 height=60 viewBox=0 0 60 60 xmlns=http://www.w3.org/2000/svg%3E%3Cg fill=none fill-rule=evenodd%3E%3Cg fill=%23ffffff fill-opacity=0.04%3E%3Cpath d=M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+
+      <!-- GIR Logo centered above title (original square format and larger) -->
+      <div style="margin-bottom:28px; display:flex; justify-content:center;">
+        <img src="GIR_square.png" alt="Global International Relocation" style="height:120px; display:block; border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,0.3);" />
+      </div>
+
+      <!-- Title -->
+      <h1 style="color:white; font-size:32px; font-weight:800; text-align:center; line-height:1.2; margin-bottom:6px; text-shadow:0 2px 20px rgba(0,0,0,0.3);">Guia Rápido Yembo<br>Yembo Quick Guide</h1>
+      <p style="color:rgba(255,255,255,0.75); font-size:13px; text-align:center; margin-bottom:20px;">Vistoria Virtual com IA · AI-Powered Virtual Survey</p>
+
+      <!-- Divider -->
+      <div style="width:50px; height:3px; background:#00b4cc; border-radius:2px; margin-bottom:20px;"></div>
+
+      <!-- Yembo Logo Front Page image (centered) -->
+      <div style="border-radius:14px; overflow:hidden; margin-bottom:24px; box-shadow:0 6px 24px rgba(0,0,0,0.35); display:flex; justify-content:center;">
+        <img src="Yembo%20LOGO%20Front%20PAge.jpg" alt="Yembo - Property surveys made simple" style="height:58px; display:block; object-fit:cover; object-position:center;" />
+      </div>
+
+      <!-- Feature pills -->
+      <div style="display:flex; gap:8px; flex-wrap:wrap; justify-content:center;">
+        <div style="background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.22); color:white; font-size:11px; font-weight:500; padding:7px 14px; border-radius:50px; display:flex; align-items:center; gap:5px;">📱 Sem instalar app · No app needed</div>
+        <div style="background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.22); color:white; font-size:11px; font-weight:500; padding:7px 14px; border-radius:50px; display:flex; align-items:center; gap:5px;">🔒 Seguro · Secure</div>
+        <div style="background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.22); color:white; font-size:11px; font-weight:500; padding:7px 14px; border-radius:50px; display:flex; align-items:center; gap:5px;">&#x26A1; Rápido · Fast</div>
+        <div style="background:rgba(255,255,255,0.13); border:1px solid rgba(255,255,255,0.22); color:white; font-size:11px; font-weight:500; padding:7px 14px; border-radius:50px; display:flex; align-items:center; gap:5px;">🤖 Inteligência Artificial · AI</div>
+      </div>
+    </div>
+
+    <!-- COVER FOOTER -->
+    <div style="padding:20px 32px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid #e2e8f0; background:white;">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="GIR.gif" alt="Global International Relocation" style="height:44px; border-radius:8px;" />
+        <div>
+          <div style="font-size:13px; font-weight:700; color:#0d1f3c;">Global International Relocation</div>
+          <div style="font-size:11px; color:#94a3b8; margin-top:2px;">www.global.pt · sales@global.pt · +351 211 309 474</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:flex-end; gap:6px;">
+        <img src="Yembo.png" alt="Yembo" style="height:16px; opacity:0.45;" />
+        <span style="font-size:10px; color:#94a3b8;">Versão 1.0 · PT / EN</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== PAGE 2 — O QUE É / WHAT IS ========== -->
+<div class="page">
+  <div class="content-page">
+    <div class="lang-stripe"><div class="pt"></div><div class="en"></div></div>
+    <div class="page-header">
+      <span class="page-header-title">O que é o Yembo · What is Yembo</span>
+      <span class="page-header-num">02</span>
+    </div>
+    <div class="two-col" style="flex:1">
+      <div class="col-pt">
+        <div class="section-label pt">🇵🇹 Português</div>
+        <h2 class="section-title">O que é o Yembo?</h2>
+        <p><strong>Yembo</strong> é uma ferramenta de <strong>vistoria virtual com inteligência artificial</strong>, usada por empresas de mudanças para criar o inventário da sua casa e calcular o orçamento de forma rápida e precisa.</p>
+        <p>Em vez de uma visita presencial longa, o cliente grava pequenos vídeos dos compartimentos e o sistema identifica automaticamente os itens, volumes e pesos para a equipa de mudanças analisar.</p>
+        <div class="img-block">
+          <img src="GIR%20pic.jpg" alt="Global International Relocation - We Work. You Enjoy!" style="width:100%; object-fit:cover; height:130px; object-position:center 30%;" />
+          <div class="img-caption">🛦 Global International Relocation · www.global.pt</div>
+        </div>
+        <div class="info-banner">
+          <span class="ib-icon">🤖</span>
+          <div><strong>Tecnologia de IA avançada</strong>O sistema reconhece sofás, camas, eletrodomésticos e centenas de outros objetos nos seus vídeos.</div>
+        </div>
+        <hr class="col-divider" />
+        <h3 class="sub-title">Dois tipos de survey</h3>
+        <div class="tip-cards">
+          <div class="tip-card">
+            <div class="tip-icon">🎬</div>
+            <div class="tip-text"><strong>Self Survey (Autónomo)</strong>Grava os vídeos sozinho, ao seu ritmo, e envia pela plataforma.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📹</div>
+            <div class="tip-text"><strong>Smart Consult (Videochamada)</strong>Um consultor liga por vídeo e acompanha-o em direto, enquanto a IA cria o inventário automaticamente.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-en">
+        <div class="section-label en">🇬🇧 English</div>
+        <h2 class="section-title">What is Yembo?</h2>
+        <p><strong>Yembo</strong> is an <strong>AI-powered virtual survey tool</strong> used by moving companies to create a detailed inventory of your home and calculate an accurate moving quote quickly.</p>
+        <p>Instead of a long in-home visit, you record short videos of each room and the system automatically identifies items, volumes, and weights for the moving team to review.</p>
+        <div class="img-block">
+          <img src="Yembo%20pic.jpg" alt="Yembo app no telemóvel" style="width:100%; object-fit:cover; height:130px; object-position:center;" />
+          <div class="img-caption">🤖 Yembo AI identifica os itens automaticamente · Yembo AI identifies items automatically</div>
+        </div>
+        <div class="info-banner">
+          <span class="ib-icon">🤖</span>
+          <div><strong>Advanced AI technology</strong>The system automatically recognises sofas, beds, appliances, and hundreds of other objects in your videos.</div>
+        </div>
+        <hr class="col-divider" />
+        <h3 class="sub-title">Two types of survey</h3>
+        <div class="tip-cards">
+          <div class="tip-card">
+            <div class="tip-icon">🎬</div>
+            <div class="tip-text"><strong>Self Survey (Independent)</strong>Record your videos at your own pace and submit them through the platform.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📹</div>
+            <div class="tip-text"><strong>Smart Consult (Video Call)</strong>A consultant joins you via live video and guides you room by room while the AI builds your inventory automatically.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-footer">
+        <img src="GIR.gif" alt="GIR" style="height:20px;" />
+        <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:#94a3b8;">Powered by <img src="Yembo.png" alt="Yembo" style="height:12px; opacity:0.5;"/></span>
+        <span class="footer-page">Pág. / Page 02</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAGE 3 — LINK / STEPS ========== -->
+<div class="page">
+  <div class="content-page">
+    <div class="lang-stripe"><div class="pt"></div><div class="en"></div></div>
+    <div class="page-header">
+      <span class="page-header-title">Quando receber o link · When you receive the link</span>
+      <span class="page-header-num">03</span>
+    </div>
+    <div class="two-col" style="flex:1">
+      <div class="col-pt">
+        <div class="section-label pt">🇵🇹 Português</div>
+        <h2 class="section-title">O que acontece quando recebe o link</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>Clique no link</strong><br>Enviado por SMS ou e-mail pela empresa de mudanças.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>Abre no navegador</strong><br>Não é preciso instalar nenhuma aplicação — funciona diretamente no Chrome ou Safari.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>Introduza os seus dados</strong><br>Nome, contacto, morada, datas da mudança, etc.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>Autorize a câmara e o microfone</strong><br>O navegador pedirá permissão — toque em <em>"Permitir"</em> para continuar.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>Siga as instruções no ecrã</strong><br>Selecione cada divisão e comece a gravar os vídeos.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content"><strong>Rever e submeter</strong><br>Se não ficou satisfeito com algum vídeo, use <em>"Regravar"</em> antes de enviar. No final, confirme todas as divisões e conclua o survey.</div>
+          </div>
+        </div>
+        <div class="phone-mockup">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ps-header">📋 Yembo Survey</div>
+              <div class="ps-item"><div class="ps-dot dot-green"></div> Quarto Principal</div>
+              <div class="ps-item"><div class="ps-dot dot-green"></div> Sala de Estar</div>
+              <div class="ps-item"><div class="ps-dot dot-blue"></div> Cozinha ▶</div>
+              <div class="ps-item"><div class="ps-dot dot-gray"></div> Corredor</div>
+              <div class="ps-item"><div class="ps-dot dot-gray"></div> Garagem</div>
+            </div>
+          </div>
+          <div class="phone-desc">
+            <h4>Ecrã do survey</h4>
+            <ul>
+              <li>🟢 Verde = gravado</li>
+              <li>🔵 Azul = a gravar</li>
+              <li>⚪ Cinza = por gravar</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-en">
+        <div class="section-label en">🇬🇧 English</div>
+        <h2 class="section-title">What happens when you receive the link</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content"><strong>Click the link</strong><br>Sent by SMS or email by your moving company.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content"><strong>Opens in your browser</strong><br>No app needed — works directly in Chrome or Safari.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content"><strong>Enter your details</strong><br>Name, contact, address, move dates, etc.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content"><strong>Allow camera and microphone</strong><br>The browser will ask — tap <em>"Allow"</em> to continue.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content"><strong>Follow the on-screen instructions</strong><br>Select each room and start recording your videos.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">6</div>
+            <div class="step-content"><strong>Review and submit</strong><br>If you are not happy with a video, use <em>"Redo"</em> before submitting. When done, confirm all rooms and complete the survey.</div>
+          </div>
+        </div>
+        <div class="phone-mockup">
+          <div class="phone-frame">
+            <div class="phone-screen">
+              <div class="ps-header">📋 Yembo Survey</div>
+              <div class="ps-item"><div class="ps-dot dot-green"></div> Master Bedroom</div>
+              <div class="ps-item"><div class="ps-dot dot-green"></div> Living Room</div>
+              <div class="ps-item"><div class="ps-dot dot-blue"></div> Kitchen ▶</div>
+              <div class="ps-item"><div class="ps-dot dot-gray"></div> Hallway</div>
+              <div class="ps-item"><div class="ps-dot dot-gray"></div> Garage</div>
+            </div>
+          </div>
+          <div class="phone-desc">
+            <h4>Survey screen</h4>
+            <ul>
+              <li>🟢 Green = recorded</li>
+              <li>🔵 Blue = recording now</li>
+              <li>⚪ Grey = not yet done</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <img src="GIR.gif" alt="GIR" style="height:20px;" />
+      <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:#94a3b8;">Powered by <img src="Yembo.png" alt="Yembo" style="height:12px; opacity:0.5;"/></span>
+      <span class="footer-page">Pág. / Page 03</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAGE 4 — RECORDING TIPS ========== -->
+<div class="page">
+  <div class="content-page">
+    <div class="lang-stripe"><div class="pt"></div><div class="en"></div></div>
+    <div class="page-header">
+      <span class="page-header-title">Dicas para gravar os vídeos · Video recording tips</span>
+      <span class="page-header-num">04</span>
+    </div>
+    <div class="two-col" style="flex:1">
+      <div class="col-pt">
+        <div class="section-label pt">🇵🇹 Português</div>
+        <h2 class="section-title">Como gravar um vídeo de qualidade</h2>
+        <div class="tip-cards">
+          <div class="tip-card">
+            <div class="tip-icon">💡</div>
+            <div class="tip-text"><strong>Prepare a divisão</strong>Ligue as luzes, abra cortinas e estores. Organize o espaço para que todos os itens sejam visíveis.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📱</div>
+            <div class="tip-text"><strong>Telemóvel na horizontal</strong>Segure sempre o telemóvel em paisagem a uma altura confortável.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🔄</div>
+            <div class="tip-text"><strong>Movimento panorâmico lento</strong>Fique num ponto fixo e rode o corpo lentamente da esquerda para a direita. Evite andar enquanto grava.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">⏱️</div>
+            <div class="tip-text"><strong>Duração ideal: 15 a 30 segundos</strong>Não ultrapasse 1 minuto por divisão. Grave cada espaço separadamente.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🗣️</div>
+            <div class="tip-text"><strong>Itens que ficam</strong>Durante a gravação, diga em voz alta o que não vai na mudança: <em>"este armário fica"</em>.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">💎</div>
+            <div class="tip-text"><strong>Objetos especiais e frágeis</strong>Mostre de perto obras de arte, instrumentos, vidros e eletrónica sensível.</div>
+          </div>
+        </div>
+        <div class="do-dont">
+          <div class="do-card">
+            <div class="label">✅ Faça</div>
+            <ul>
+              <li>Luzes acesas</li>
+              <li>Horizontal (paisagem)</li>
+              <li>Movimento lento</li>
+              <li>Uma divisão de cada vez</li>
+              <li>Diga o que fica</li>
+            </ul>
+          </div>
+          <div class="dont-card">
+            <div class="label">❌ Evite</div>
+            <ul>
+              <li>Gravar no escuro</li>
+              <li>Telemóvel vertical</li>
+              <li>Andar rapidamente</li>
+              <li>Mais de 1 min por div.</li>
+              <li>Objetos tapados</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-en">
+        <div class="section-label en">🇬🇧 English</div>
+        <h2 class="section-title">How to record a quality video</h2>
+        <div class="tip-cards">
+          <div class="tip-card">
+            <div class="tip-icon">💡</div>
+            <div class="tip-text"><strong>Prepare the room</strong>Turn on all lights and open curtains and blinds. Tidy the space so all items are visible.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">📱</div>
+            <div class="tip-text"><strong>Hold phone horizontally</strong>Always hold your phone in landscape orientation at a comfortable height.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🔄</div>
+            <div class="tip-text"><strong>Slow panoramic sweep</strong>Stand in one spot and rotate your body slowly from left to right. Avoid walking while recording.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">⏱️</div>
+            <div class="tip-text"><strong>Ideal length: 15 to 30 seconds</strong>Do not exceed 1 minute per room. Record each space separately.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">🗣️</div>
+            <div class="tip-text"><strong>Items not moving</strong>While recording, say out loud what is staying: <em>"this cabinet stays"</em>.</div>
+          </div>
+          <div class="tip-card">
+            <div class="tip-icon">💎</div>
+            <div class="tip-text"><strong>Fragile and special items</strong>Show artwork, instruments, glass surfaces, and sensitive electronics up close.</div>
+          </div>
+        </div>
+        <div class="do-dont">
+          <div class="do-card">
+            <div class="label">✅ Do</div>
+            <ul>
+              <li>Lights on</li>
+              <li>Landscape/horizontal</li>
+              <li>Slow, steady movement</li>
+              <li>One room at a time</li>
+              <li>Say what stays behind</li>
+            </ul>
+          </div>
+          <div class="dont-card">
+            <div class="label">❌ Don't</div>
+            <ul>
+              <li>Record in the dark</li>
+              <li>Hold phone vertically</li>
+              <li>Walk around quickly</li>
+              <li>Exceed 1 min per room</li>
+              <li>Leave items hidden</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <img src="GIR.gif" alt="GIR" style="height:20px;" />
+      <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:#94a3b8;">Powered by <img src="Yembo.png" alt="Yembo" style="height:12px; opacity:0.5;"/></span>
+      <span class="footer-page">Pág. / Page 04</span>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PAGE 5 — PROBLEMS, SECURITY, SUPPORT ========== -->
+<div class="page">
+  <div class="content-page">
+    <div class="lang-stripe"><div class="pt"></div><div class="en"></div></div>
+    <div class="page-header">
+      <span class="page-header-title">Problemas comuns · Segurança · Suporte</span>
+      <span class="page-header-num">05</span>
+    </div>
+    <div class="two-col" style="flex:1">
+      <div class="col-pt">
+        <div class="section-label pt">🇵🇹 Português</div>
+        <h2 class="section-title">Problemas comuns</h2>
+        <div class="problem-cards">
+          <div class="problem-card">
+            <div class="problem-header">⚫ Ecrã preto / Câmara não funciona</div>
+            <div class="problem-body"><ul>
+              <li>Verifique se deu permissão de câmara e microfone ao navegador (Chrome ou Safari).</li>
+              <li>Se continuar sem funcionar, grave com a câmara do telemóvel e carregue os vídeos pelo botão <strong>"Carregar vídeo"</strong>.</li>
+            </ul></div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-header">🐢 Internet lenta / Upload demorado</div>
+            <div class="problem-body"><ul>
+              <li>Se aparecer mensagem para esperar, alguns vídeos ainda estão a carregar. Aguarde ou mude para Wi-Fi.</li>
+              <li>Em locais com pouca rede, grave primeiro e faça o upload mais tarde.</li>
+            </ul></div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-header">📹 Não consigo entrar no Smart Consult</div>
+            <div class="problem-body"><ul>
+              <li>Se aparecer "navegador não suportado", mude para o <strong>Chrome atualizado</strong> e tente novamente.</li>
+            </ul></div>
+          </div>
+        </div>
+        <hr class="col-divider" />
+        <h2 class="section-title">🔒 Segurança e Privacidade</h2>
+        <div class="security-grid">
+          <div class="security-card">
+            <span class="icon">🏦</span>
+            <span class="label">Nível bancário</span>
+            <span class="desc">Encriptação de segurança bancária para todos os vídeos e dados</span>
+          </div>
+          <div class="security-card">
+            <span class="icon">🔐</span>
+            <span class="label">Acesso restrito</span>
+            <span class="desc">Só a sua empresa de mudanças tem acesso às imagens</span>
+          </div>
+          <div class="security-card">
+            <span class="icon">🗑️</span>
+            <span class="label">Eliminação segura</span>
+            <span class="desc">Os seus dados são eliminados após a mudança</span>
+          </div>
+          <div class="security-card">
+            <span class="icon">🛡️</span>
+            <span class="label">Sem partilha</span>
+            <span class="desc">As suas imagens nunca são partilhadas com terceiros</span>
+          </div>
+        </div>
+        <h2 class="section-title" style="margin-top:16px">📞 Contacto e Suporte</h2>
+        <div class="contact-box">
+          <h3>Em caso de dúvida durante o survey</h3>
+          <div class="contact-item">
+            <span class="ci-icon">📞</span>
+            <div class="ci-text"><span class="ci-label">Telefône</span><span class="ci-value">+351 211 309 474</span></div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">✉️</span>
+            <div class="ci-text"><span class="ci-label">E-mail</span><span class="ci-value">sales@global.pt</span></div>
+          </div>
+        </div>
+        <div class="note-box">
+          <strong>💡 Dica</strong>
+          Em problemas técnicos, informe que está a usar <strong>Yembo</strong> para que a equipa possa orientá-lo corretamente.
+        </div>
+      </div>
+      <div class="col-en">
+        <div class="section-label en">🇬🇧 English</div>
+        <h2 class="section-title">Common issues</h2>
+        <div class="problem-cards">
+          <div class="problem-card">
+            <div class="problem-header">⚫ Black screen / Camera not working</div>
+            <div class="problem-body"><ul>
+              <li>Check that you have granted camera and microphone permissions in your browser (Chrome or Safari).</li>
+              <li>If it still does not work, record with your phone's camera app and upload clips via <strong>"Upload Video"</strong>.</li>
+            </ul></div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-header">🐢 Slow internet / Upload taking too long</div>
+            <div class="problem-body"><ul>
+              <li>If asked to wait, some videos are still uploading. Please wait or switch to Wi-Fi.</li>
+              <li>In low-signal areas, record first and upload later with a stronger connection.</li>
+            </ul></div>
+          </div>
+          <div class="problem-card">
+            <div class="problem-header">📹 Cannot join Smart Consult session</div>
+            <div class="problem-body"><ul>
+              <li>If you see "browser not supported", switch to <strong>updated Chrome</strong> and try again.</li>
+            </ul></div>
+          </div>
+        </div>
+        <hr class="col-divider" />
+        <h2 class="section-title">🔒 Security &amp; Privacy</h2>
+        <div class="security-grid">
+          <div class="security-card">
+            <span class="icon">🏦</span>
+            <span class="label">Bank-level security</span>
+            <span class="desc">Bank-grade encryption for all your videos and data</span>
+          </div>
+          <div class="security-card">
+            <span class="icon">🔐</span>
+            <span class="label">Restricted access</span>
+            <span class="desc">Only your moving company can access images of your home</span>
+          </div>
+          <div class="security-card">
+            <span class="icon">🗑️</span>
+            <span class="label">Secure deletion</span>
+            <span class="desc">Your data is deleted after the moving process is complete</span>
+          </div>
+          <div class="security-card">
+            <span class="icon">🛡️</span>
+            <span class="label">No sharing</span>
+            <span class="desc">Your footage is never shared with any third parties</span>
+          </div>
+        </div>
+        <h2 class="section-title" style="margin-top:16px">📞 Contact &amp; Support</h2>
+        <div class="contact-box">
+          <h3>If you need help during the survey</h3>
+          <div class="contact-item">
+            <span class="ci-icon">📞</span>
+            <div class="ci-text"><span class="ci-label">Phone</span><span class="ci-value">+351 211 309 474</span></div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">✉️</span>
+            <div class="ci-text"><span class="ci-label">Email</span><span class="ci-value">sales@global.pt</span></div>
+          </div>
+        </div>
+        <div class="note-box">
+          <strong>💡 Tip</strong>
+          For technical issues, mention that you are using <strong>Yembo</strong> so our team can guide you correctly.
+        </div>
+      </div>
+    </div>
+    <div class="page-footer">
+      <img src="GIR.gif" alt="GIR" style="height:20px;" />
+      <span style="display:flex; align-items:center; gap:5px; font-size:10px; color:#94a3b8;">Powered by <img src="Yembo.png" alt="Yembo" style="height:12px; opacity:0.5;"/> · www.global.pt</span>
+      <span class="footer-page">Pág. / Page 05</span>
+    </div>
+  </div>
+</div>
+
+</div><!-- /pages -->
+</body>
+</html>
